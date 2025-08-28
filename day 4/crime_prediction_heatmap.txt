@@ -1,0 +1,22 @@
+CLASS Graph
+    ATTRIBUTES: adjacencyList (Map<Zone, List<Zone>>), crimeRate(Map<Zone, int>)
+
+FUNCTION DFS(zone, visited, totalRisk)
+    MARK zone as visited
+    totalRisk = totalRisk + crimeRate[zone]
+    FOR each neighbor in adjacencyList[zone]
+        IF neighbor not visited
+            totalRisk = DFS(neighbor, visited, totalRisk)
+    RETURN totalRisk
+
+MAIN
+    CREATE graph with zones and crimeRate
+    visited = emptySet
+    riskLevels = Map<Zone, int>
+
+    FOR each zone in graph
+        IF zone not visited
+            risk = DFS(zone, visited, 0)
+            riskLevels[zone] = risk
+
+    PRINT zones with highest risk values

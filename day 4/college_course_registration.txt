@@ -1,0 +1,22 @@
+CLASS Student
+    ATTRIBUTES: studentId, name
+
+CLASS Course
+    ATTRIBUTES: courseId, name
+
+MAIN
+    courseMap = Map<Course, List<Student>>
+
+    FUNCTION registerStudent(course, student)
+        IF course not in courseMap
+            courseMap[course] = new List<Student>
+        courseMap[course].add(student)
+
+    FUNCTION displayStudents(course)
+        PRINT courseMap[course]
+
+    registerStudent("Java", "Anurag")
+    registerStudent("Java", "Rahul")
+    registerStudent("Python", "Priya")
+
+    displayStudents("Java")

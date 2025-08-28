@@ -1,0 +1,29 @@
+Banking Portal
+CLASS Account
+    ATTRIBUTES: accountNumber, balance
+    METHOD deposit(amount)
+        balance = balance + amount
+    METHOD withdraw(amount)  # to be overridden
+        PRINT "Base withdraw: Not implemented"
+
+CLASS Saving EXTENDS Account
+    METHOD withdraw(amount)
+        IF balance - amount >= 1000
+            balance = balance - amount
+            PRINT "Withdrawal successful from Savings"
+        ELSE
+            PRINT "Insufficient balance in Savings"
+
+CLASS Current EXTENDS Account
+    METHOD withdraw(amount)
+        IF balance - amount >= 0
+            balance = balance - amount
+            PRINT "Withdrawal successful from Current"
+        ELSE
+            PRINT "Overdraft not allowed"
+
+MAIN
+    CREATE Saving acc1 WITH balance=5000
+    CREATE Current acc2 WITH balance=2000
+    acc1.withdraw(4500)   # fails if below min balance
+    acc2.withdraw(2200)   # fails if negative

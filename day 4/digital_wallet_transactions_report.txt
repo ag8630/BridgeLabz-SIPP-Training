@@ -1,0 +1,26 @@
+CLASS Transaction
+    ATTRIBUTES: id, merchant, amount, date
+
+MAIN
+    transactions = [list of Transaction]
+
+    # Group by merchant → then group by month
+    report = Map<Merchant, Map<Month, List<Transaction>>>
+
+    FOR each transaction t in transactions
+        month = extractMonth(t.date)
+        merchant = t.merchant
+
+        IF merchant not in report
+            report[merchant] = new Map<Month, List<Transaction>>
+
+        IF month not in report[merchant]
+            report[merchant][month] = new List<Transaction>
+
+        report[merchant][month].add(t)
+
+    # Generate summary
+    FOR each merchant in report
+        FOR each month in report[merchant]
+            total = SUM(transaction.amount for t in report[merchant][month])
+            PRINT merchant, month, total
