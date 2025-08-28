@@ -1,0 +1,44 @@
+// Strategy Interface
+interface DiagnosisStrategy {
+    List<String> diagnose(List<String> symptoms);
+}
+
+// Rule-based strategy
+class RuleBasedDiagnosis implements DiagnosisStrategy {
+    List<String> diagnose(List<String> symptoms) {
+        if (symptoms.contains("fever") && symptoms.contains("cough"))
+            return ["Flu", "COVID-19"];
+        return ["Unknown"];
+    }
+}
+
+// AI-based strategy
+class AIBasedDiagnosis implements DiagnosisStrategy {
+    List<String> diagnose(List<String> symptoms) {
+        // imagine ML model applied
+        return ["Migraine", "Vertigo"];
+    }
+}
+
+// Context
+class DiagnosisContext {
+    private DiagnosisStrategy strategy;
+    void setStrategy(DiagnosisStrategy s) { strategy = s; }
+    List<String> execute(List<String> symptoms) {
+        return strategy.diagnose(symptoms);
+    }
+}
+
+// Client
+main() {
+    patient1Symptoms = ["fever", "cough", "fatigue"];
+    context = new DiagnosisContext();
+    context.setStrategy(new RuleBasedDiagnosis());
+    print(context.execute(patient1Symptoms));
+
+    patient2Symptoms = ["headache", "dizziness"];
+    context.setStrategy(new AIBasedDiagnosis());
+    print(context.execute(patient2Symptoms));
+
+    // Tomorrow → new GeneticPatternDiagnosis() add karna → no old code change!
+}

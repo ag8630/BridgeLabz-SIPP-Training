@@ -1,0 +1,31 @@
+// Tax interface
+interface TaxCalculator { double calculate(double price); }
+class FoodTax implements TaxCalculator { double calculate(double p){ return p*0.05; } }
+class BeverageTax implements TaxCalculator { double calculate(double p){ return p*0.12; } }
+class ImportedTax implements TaxCalculator { double calculate(double p){ return p*0.05 + 100; } }
+
+// Discount
+interface DiscountPolicy { double apply(double total); }
+class NoDiscount implements DiscountPolicy { double apply(double t){ return t; } }
+class FlatDiscount implements DiscountPolicy { double apply(double t){ return t - 100; } }
+class PercentageDiscount implements DiscountPolicy { double apply(double t){ return t * 0.90; } } // 10% off
+
+// Bill Item
+class Item {
+    String name;
+    double price;
+    TaxCalculator tax;
+    double getTotal(){ return price + tax.calculate(price); }
+}
+
+// POS System
+class BillingSystem {
+    List<Item> items;
+    DiscountPolicy discount;
+
+    double generateBill(){
+        subtotal = 0;
+        for(item in items) subtotal += item.getTotal();
+        return discount.apply(subtotal);
+    }
+}

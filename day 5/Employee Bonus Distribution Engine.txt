@@ -1,0 +1,17 @@
+class Employee {
+   String name, dept;
+   int rating;
+   double salary;
+}
+
+employees.stream()
+   .collect(groupingBy(Employee::getDept))
+   .forEach(dept -> {
+       totalSalary = sum(salary);
+       pool = 0.1 * totalSalary;
+       totalRating = sum(rating);
+       for(emp in deptEmployees){
+           share = (emp.rating / totalRating) * pool;
+           print(emp.name + " → " + share);
+       }
+   });

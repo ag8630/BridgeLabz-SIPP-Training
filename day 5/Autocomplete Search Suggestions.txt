@@ -1,0 +1,23 @@
+class TrieNode {
+    Map<char, TrieNode> children;
+    boolean isEnd;
+    int popularity;
+}
+
+class Trie {
+    insert(word) { ... }
+    search(prefix) {
+        // traverse to prefix node
+        // collect all words below
+        // sort by popularity
+    }
+}
+
+main() {
+    trie.insert("pizza hut");
+    trie.insert("pizza point");
+    trie.insert("pita bread");
+    trie.insert("pizzeria");
+
+    print(trie.search("pi")); // top matches
+}

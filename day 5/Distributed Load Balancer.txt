@@ -1,0 +1,12 @@
+queue = [S1, S2, S3]
+
+for each request Ri:
+    server = queue.poll()
+    print(Ri + " → " + server)
+    queue.add(server)
+
+# Add new server
+queue.add(S4)
+
+# Remove failed server
+queue.remove(S2)

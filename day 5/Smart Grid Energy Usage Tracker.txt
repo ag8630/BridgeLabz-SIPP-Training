@@ -1,0 +1,8 @@
+Map<String, Map<String, List<Integer>>> data;
+
+// Example: data["Zone-A"]["2025-08-01"] = [120, 90, 200, 150]
+
+for each zone in data:
+   for each day in zone:
+       peak = max(zone[day])
+       print(zone + " " + day + " → Peak " + peak)
